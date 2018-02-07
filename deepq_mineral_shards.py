@@ -8,11 +8,13 @@ import zipfile
 from absl import flags
 
 import baselines.common.tf_util as U
+import baselines.deepq.utils as QU
 
 from baselines import logger
 from baselines.common.schedules import LinearSchedule
 from baselines import deepq
 from baselines.deepq.replay_buffer import ReplayBuffer, PrioritizedReplayBuffer
+
 
 from pysc2.lib import actions as sc2_actions
 from pysc2.env import environment
@@ -50,7 +52,8 @@ class ActWrapper(object):
         f.write(model_data)
 
       zipfile.ZipFile(arc_path, 'r', zipfile.ZIP_DEFLATED).extractall(td)
-      U.load_state(os.path.join(td, "model"))
+      #U.load_state(os.path.join(td, "model"))
+      QU.load_state(os.path.join(td, "model"))
 
     return ActWrapper(act)
 
